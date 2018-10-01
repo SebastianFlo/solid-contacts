@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
+import { SET_SESSION } from './data/types';
 
 const $ = window['$'];
 const $rdf = window['$rdf'];
@@ -9,25 +11,26 @@ const solid = window['solid'];
 Vue.config.productionTip = false
 
 new Vue({
-  router,
-  render: h => h(App)
+    router,
+    store,
+    render: h => h(App)
 }).$mount('#app')
 
 document.addEventListener('DOMContentLoaded', load);
 
 function load() {
-    const loginEl = $('#login');
-    const loginButton = $('#login button')
+    // const loginEl = $('#login');
+    // const loginButton = $('#login button')
 
     const logoutEl = $('#logout');
     const logoutButton = $('#logout #logout-b')
 
-    const userEl = $('#user');
+    // const userEl = $('#user');
     const profileEl = $('#profile');
     const nameEl = $('#name');
     const viewButton = $('#view');
 
-    const popupUri = 'popup.html';
+    // const popupUri = 'popup.html';
     const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
 
     init();
@@ -39,24 +42,29 @@ function load() {
     }
 
     function setupSession() {
-        loginButton.click(() => solid.auth.popupLogin({ popupUri }));
+        // loginButton.click(() => solid.auth.popupLogin({ popupUri }));
         logoutButton.click(() => solid.auth.logout());
 
-        solid.auth.trackSession(session => {
-            const loggedIn = !!session;
+        // solid.auth.trackSession(session => {
+            // store.commit({
+            //     type: SET_SESSION,
+            //     session
+            // });
 
-            loginEl.toggle(!loggedIn);
-            logoutEl.toggle(loggedIn);
+            // const loggedIn = !!session;
 
-            if (loggedIn) {
-                const sessionId = session.webId;
-                userEl.text(sessionId);
+            // loginEl.toggle(!loggedIn);
+            // logoutEl.toggle(loggedIn);
 
-                if (!profileEl.val()) {
-                    profileEl.val(sessionId);
-                }
-            }
-        });
+            // if (loggedIn) {
+            //     const sessionId = session.webId;
+            //     // userEl.text(sessionId);
+
+            //     if (!profileEl.val()) {
+            //         profileEl.val(sessionId);
+            //     }
+            // }
+        // });
     }
 
     function hookView() {
@@ -81,9 +89,9 @@ function load() {
                 $('#friends').append(
                     $('<li>').append(
                         $('<a>').text(fullName && fullName.value || friend.value)
-                                .click(() => profileEl.val(friend.value))
-                                .click(loadProfile)
-                        )
+                            .click(() => profileEl.val(friend.value))
+                            .click(loadProfile)
+                    )
                 )
             });
         });
