@@ -43,6 +43,8 @@
     import Logout from '@/components/Logout.vue';
     import { SET_SESSION } from '@/data/types';
 
+    const solid = window['solid'];
+
     export default {
         name: 'App',
 
