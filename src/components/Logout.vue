@@ -1,6 +1,6 @@
 <template>
     <div id="logout">
-        You are logged in as <b>{{ session || 'unknown' }}</b>.
+        You are logged in as <b>{{ sessionUser || 'unknown' }}</b>.
         <div>
             <button @click="logout">Logout</button>
         </div>
@@ -25,8 +25,8 @@
             }
         },
         computed: {
-            session: function () {
-                return this.$store.getters.session;
+            sessionUser: function () {
+                return this.$store.getters.session && this.$store.getters.session.webId;
             }
         }
     }

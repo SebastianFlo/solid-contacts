@@ -1,7 +1,7 @@
 <template>
     <div id="profile">
         <label for="profile">Profile:</label>
-        <input v-model="searchId">
+        <input v-model="searchId" placeholder="Insert Url Here">
         <button @click="view(searchId)">View</button>
 
         <p>{{ user.name }}</p>
@@ -25,7 +25,7 @@
         name: 'Profile',
         data: function () {
             return {
-                searchId: 'Insert Url Here'
+                searchId: ''
             };
         },
         methods: {

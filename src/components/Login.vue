@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    import * as solid from 'solid-auth-client';
+    const solid = window['solid'];
 
     export default {
         name: 'Login',
@@ -17,9 +17,10 @@
         },
         methods: {
             login() {
-                if (!solid) {
+                if (!solid || !solid.auth) {
                     return;
                 }
+
                 solid.auth.popupLogin({ popupUri: this.popupUri });
             }
         }

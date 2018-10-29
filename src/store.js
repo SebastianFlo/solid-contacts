@@ -33,6 +33,9 @@ export default new Vuex.Store({
     loggedIn: state => {
       return !!state.session;
     },
+    session: state => {
+      return state.session;
+    },
     user: state => {
       return state.user;
     }
