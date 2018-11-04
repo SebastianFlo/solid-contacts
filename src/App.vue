@@ -1,7 +1,8 @@
 <template>
     <div id="app">
         <Logout v-if="loggedIn"></Logout>
-        <router-view/>
+
+        <router-view />
     </div>
 </template>
 
@@ -19,7 +20,7 @@
             Logout
         },
         mounted: function () {
-          this.trackSession();
+            this.trackSession();
         },
         methods: {
             trackSession() {

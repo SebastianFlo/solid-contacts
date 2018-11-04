@@ -1,12 +1,12 @@
 <template>
     <div id="profile">
         <label for="profile">Profile:</label>
-        <input v-model="searchId"
-            placeholder="Insert Url Here">
-        <button @click="view(searchId)">View</button>
+        <input v-model="searchId" placeholder="Insert Url Here">
+        <button :disabled="searchId.length < 1" @click="view(searchId)">View</button>
 
         <p>{{ user.name }}</p>
 
+        <div v-if="loadingFriends">...</div>
         <ul>
             <li v-for="friend in user.friends"
                 :key="friend.id">
@@ -28,21 +28,27 @@
         name: 'Profile',
         data: function () {
             return {
-                searchId: ''
+                searchId: '',
+                loadingFriends: false
             };
         },
         methods: {
             async view(personId) {
+                const trimmedPersonId = personId.trim();
                 // TODO View here
                 // Set up a local data store and associated data fetcher
                 const rdfStore = $rdf.graph();
                 const fetcher = new $rdf.Fetcher(rdfStore);
 
                 // // Load the person's data into the rdfStore
-                await fetcher.load(personId);
+                await fetcher.load(trimmedPersonId);
 
                 // // Display their details
-                const user = rdfStore.any($rdf.sym(personId), FOAF('name'));
+                const user = rdfStore.any($rdf.sym(trimmedPersonId), FOAF('name'));
+
+                if (!user) {
+                    return;
+                }
 
                 this.$store.commit({
                     type: SET_USER,
@@ -51,7 +57,7 @@
                     }
                 });
 
-                const friends = rdfStore.each($rdf.sym(personId), FOAF('knows'));
+                const friends = rdfStore.each($rdf.sym(trimmedPersonId), FOAF('knows'));
 
                 this.$store.commit({
                     type: UPDATE_USER,
@@ -62,9 +68,14 @@
                 });
 
                 friends.forEach(async (friend) => {
+                    this.loadingFriends = true;
                     await fetcher.load(friend);
 
                     const fullName = rdfStore.any(friend, FOAF('name'));
+
+                    if (!fullName) {
+                        return;
+                    }
 
                     this.$store.commit({
                         type: UPDATE_USER,
@@ -78,6 +89,8 @@
                             ]
                         }
                     });
+
+                    this.loadingFriends = false;
                 });
 
 
