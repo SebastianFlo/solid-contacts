@@ -1,8 +1,11 @@
 <template>
     <div id="profile">
         <label for="profile">Profile:</label>
-        <input v-model="searchId" placeholder="Insert Url Here">
-        <button :disabled="searchId.length < 1" @click="view(searchId)">View</button>
+        <input v-model="searchId"
+            placeholder="Insert Url Here"
+            v-on:keyup.13="goTo(searchId)">
+        <button :disabled="searchId.length < 1"
+            @click="goTo(searchId)">View</button>
 
         <p>{{ user.name }}</p>
 
@@ -10,8 +13,7 @@
         <ul>
             <li v-for="friend in user.friends"
                 :key="friend.id">
-                <a href="#"
-                    @click="searchId=friend.id; view(friend.id)">{{ friend.name }}</a>
+                <a href="#" @click="goTo(friend.id)">{{ friend.name }}</a>
             </li>
         </ul>
     </div>
@@ -20,19 +22,38 @@
 <script>
     import * as $rdf from 'rdflib';
 
-    import { SET_USER, UPDATE_USER } from '../state/types';
+    import { SET_USER, UPDATE_USER } from '@/state/types';
 
     const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
 
     export default {
         name: 'Profile',
+        props: ['initSearchId'],
         data: function () {
             return {
-                searchId: '',
+                searchId: this.initSearchId || '',
                 loadingFriends: false
             };
         },
+        mounted() {
+          if (this.searchId) {
+              this.view(this.searchId);
+          }
+        },
+        watch: {
+            initSearchId: function (newVal) {
+                if (!newVal) {
+                    return;
+                }
+
+                this.searchId = newVal;
+                this.view(newVal);
+            }
+        },
         methods: {
+            goTo(profile) {
+                this.$router.push({ name: 'profile', params: { id: profile } });
+            },
             async view(personId) {
                 const trimmedPersonId = personId.trim();
                 // TODO View here

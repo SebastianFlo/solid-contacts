@@ -1,17 +1,20 @@
 <template>
     <div id="app">
+        <router-link to="/">
+            Home
+        </router-link>
+
         <Logout v-if="loggedIn"></Logout>
 
-        <router-view />
+        <router-view/>
     </div>
 </template>
 
 <script>
     import * as solidAuth from 'solid-auth-client';
 
-    import Logout from '@/components/Logout.vue';
+    import Logout from '@/modules/core/logout/Logout.component.vue';
     import { SET_SESSION } from '@/state/types';
-
 
     export default {
         name: 'App',

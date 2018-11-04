@@ -1,6 +1,10 @@
 <template>
     <div id="logout">
-        You are logged in as <b>{{ sessionUser || 'unknown' }}</b>.
+        You are logged in as
+        <router-link :to="{ name: 'profile', params: { id: sessionUser }}">
+            <b>{{ sessionUser || 'unknown' }}</b>
+        </router-link>
+
         <div>
             <button @click="logout">Logout</button>
         </div>
