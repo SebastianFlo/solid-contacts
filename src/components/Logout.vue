@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    import * as solid from 'solid-auth-client';
+    // import * as solidAuth from 'solid-auth-client';
 
     export default {
         name: 'Logout',
@@ -18,10 +18,7 @@
         },
         methods: {
             logout() {
-                if (!solid) {
-                    return;
-                }
-                solid.auth.logout();
+                solidAuth.logout();
             }
         },
         computed: {
@@ -31,3 +28,9 @@
         }
     }
 </script>
+
+<style lang="scss">
+    #logout {
+        border: 1px solid cornflowerblue;
+    }
+</style>

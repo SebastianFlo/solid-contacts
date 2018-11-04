@@ -9,7 +9,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import Login from '@/components/Login.vue';
 import Profile from '@/components/Profile.vue';
 

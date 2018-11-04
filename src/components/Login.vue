@@ -6,7 +6,7 @@
 </template>
 
 <script>
-    const solid = window['solid'];
+    // import * as solidAuth from 'solid-auth-client';
 
     export default {
         name: 'Login',
@@ -17,11 +17,7 @@
         },
         methods: {
             login() {
-                if (!solid || !solid.auth) {
-                    return;
-                }
-
-                solid.auth.popupLogin({ popupUri: this.popupUri });
+                solidAuth.popupLogin({ popupUri: this.popupUri });
             }
         }
     }

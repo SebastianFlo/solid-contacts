@@ -1,22 +1,25 @@
 <template>
     <div id="profile">
         <label for="profile">Profile:</label>
-        <input v-model="searchId" placeholder="Insert Url Here">
+        <input v-model="searchId"
+            placeholder="Insert Url Here">
         <button @click="view(searchId)">View</button>
 
         <p>{{ user.name }}</p>
 
         <ul>
-            <li v-for="friend in user.friends" :key="friend.id">
-              <a href="#" @click="searchId=friend.id; view(friend.id)">{{ friend.name }}</a>
+            <li v-for="friend in user.friends"
+                :key="friend.id">
+                <a href="#"
+                    @click="searchId=friend.id; view(friend.id)">{{ friend.name }}</a>
             </li>
-          </ul>
+        </ul>
     </div>
 </template>
 
 <script>
-    // import * as solid from 'solid-auth-client';
-    import * as $rdf from 'rdflib';
+    // import * as solidAuth from 'solid-auth-client';
+    // import * as $rdf from 'rdflib';
     import { SET_USER, UPDATE_USER } from '../data/types';
 
     const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
@@ -75,14 +78,6 @@
                             ]
                         }
                     });
-
-                    // $('#friends').append(
-                    //     $('<li>').append(
-                    //         $('<a>').text(fullName && fullName.value || friend.value)
-                    //             .click(() => profileEl.val(friend.value))
-                    //             .click(loadProfile)
-                    //     )
-                    // )
                 });
 
 
@@ -95,3 +90,10 @@
         }
     }
 </script>
+
+<style lang="scss">
+    #profile {
+        width: 400px;
+        border: 1px solid black;
+    }
+</style>

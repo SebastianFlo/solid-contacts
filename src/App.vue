@@ -1,9 +1,43 @@
 <template>
     <div id="app">
         <Logout v-if="loggedIn"></Logout>
-        <router-view />
+        <router-view/>
     </div>
 </template>
+
+<script>
+    // import * as solidAuth from 'solid-auth-client';
+
+    import Logout from '@/components/Logout.vue';
+    import { SET_SESSION } from '@/data/types';
+
+
+    export default {
+        name: 'App',
+
+        components: {
+            Logout
+        },
+        mounted: function () {
+          this.trackSession();
+        },
+        methods: {
+            trackSession() {
+                solidAuth.trackSession(session => {
+                    this.$store.commit({
+                        type: SET_SESSION,
+                        session
+                    });
+                });
+            }
+        },
+        computed: {
+            loggedIn() {
+                return this.$store.getters.loggedIn
+            }
+        },
+    }
+</script>
 
 <style lang="scss">
     body {
@@ -32,42 +66,6 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
-    }
-
-    #profile {
-        width: 400px;
+        border: 1px solid blueviolet;
     }
 </style>
-
-<script>
-    import Logout from '@/components/Logout.vue';
-    import { SET_SESSION } from '@/data/types';
-
-    const solid = window['solid'];
-
-    export default {
-        name: 'App',
-
-        components: {
-            Logout
-        },
-        mounted: function () {
-          this.trackSession();
-        },
-        methods: {
-            trackSession() {
-                solid.auth.trackSession(session => {
-                    this.$store.commit({
-                        type: SET_SESSION,
-                        session
-                    });
-                });
-            }
-        },
-        computed: {
-            loggedIn() {
-                return this.$store.getters.loggedIn
-            }
-        },
-    }
-</script>

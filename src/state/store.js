@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { SET_SESSION, SET_USER, UPDATE_USER } from './data/types'
+import { SET_SESSION, SET_USER, UPDATE_USER } from './types'
 
 Vue.use(Vuex)
 
@@ -11,23 +11,17 @@ export default new Vuex.Store({
   },
   mutations: {
     [SET_SESSION] (state, payload) {
-        // mutate state
         state.session = payload.session;
     },
     [SET_USER] (state, payload) {
-        // mutate state
         state.user = payload.user;
     },
     [UPDATE_USER] (state, payload) {
-        // mutate state
         state.user = {
             ...state.user,
             ...payload.user
         };
     }
-  },
-  actions: {
-
   },
   getters: {
     loggedIn: state => {
