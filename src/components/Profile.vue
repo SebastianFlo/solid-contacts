@@ -18,9 +18,9 @@
 </template>
 
 <script>
-    // import * as solidAuth from 'solid-auth-client';
-    // import * as $rdf from 'rdflib';
-    import { SET_USER, UPDATE_USER } from '../data/types';
+    import * as $rdf from 'rdflib';
+
+    import { SET_USER, UPDATE_USER } from '../state/types';
 
     const FOAF = $rdf.Namespace('http://xmlns.com/foaf/0.1/');
 

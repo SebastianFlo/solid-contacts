@@ -8,7 +8,7 @@
 </template>
 
 <script>
-    // import * as solidAuth from 'solid-auth-client';
+    import * as solidAuth from 'solid-auth-client';
 
     export default {
         name: 'Logout',

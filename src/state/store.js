@@ -1,6 +1,6 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { SET_SESSION, SET_USER, UPDATE_USER } from './types'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { SET_SESSION, SET_USER, UPDATE_USER } from './types';
 
 Vue.use(Vuex)
 

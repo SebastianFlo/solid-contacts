@@ -6,10 +6,10 @@
 </template>
 
 <script>
-    // import * as solidAuth from 'solid-auth-client';
+    import * as solidAuth from 'solid-auth-client';
 
     import Logout from '@/components/Logout.vue';
-    import { SET_SESSION } from '@/data/types';
+    import { SET_SESSION } from '@/state/types';
 
 
     export default {
