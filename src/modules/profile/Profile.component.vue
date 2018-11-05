@@ -56,9 +56,11 @@
             },
             async view(personId) {
                 const trimmedPersonId = personId.trim();
-                // TODO View here
+
                 // Set up a local data store and associated data fetcher
                 const rdfStore = $rdf.graph();
+
+
                 const fetcher = new $rdf.Fetcher(rdfStore);
 
                 // // Load the person's data into the rdfStore
