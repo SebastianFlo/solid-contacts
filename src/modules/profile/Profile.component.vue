@@ -51,8 +51,9 @@
             }
         },
         methods: {
-            goTo(profile) {
-                this.$router.push({ name: 'profile', params: { id: profile } });
+            goTo(profileId) {
+                // eslint-disable-next-line
+                this.$router.push({ name: 'profile', params: { id: profileId } }, null, this.view(profileId));
             },
             async view(personId) {
                 const trimmedPersonId = personId.trim();

@@ -4,7 +4,7 @@
 
         <Login v-if="!loggedIn"></Login>
 
-        <router-link to="/profile">Profile Viewer</router-link>
+        <router-link v-if="loggedIn" to="/profile">Profile Viewer</router-link>
     </div>
 </template>
 
