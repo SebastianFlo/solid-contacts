@@ -2,8 +2,9 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from './state/store';
 
-import Home from './modules/home/Home.view.vue';
-import Profile from './modules/profile/Profile.view.vue';
+import HomeView from './modules/home/Home.view.vue';
+import ProfileView from './modules/profile/Profile.view.vue';
+import RdflibView from './modules/rdflib/Rdflib.view.vue';
 
 Vue.use(Router);
 
@@ -12,19 +13,25 @@ const router = new Router({
         {
             path: '/',
             name: 'home',
-            component: Home
+            component: HomeView
         },
         {
             path: '/profile/:id',
             name: 'profile',
-            component: Profile,
+            component: ProfileView,
             meta: { requiresAuth: true }
         },
         {
             path: '/profile',
             name: 'profile',
-            component: Profile,
+            component: ProfileView,
             meta: { requiresAuth: true }
+        },
+        {
+            path: '/rdflib',
+            name: 'rdflib',
+            component: RdflibView,
+            meta: { requiresAuth: false }
         },
     ]
 });

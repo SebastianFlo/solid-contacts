@@ -4,6 +4,10 @@
             Home
         </router-link>
 
+        <router-link to="/rdflib">
+            Rdflib
+        </router-link>
+
         <Logout v-if="loggedIn"></Logout>
 
         <router-view/>
